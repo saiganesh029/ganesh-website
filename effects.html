@@ -1,0 +1,48 @@
+<html><head>
+    <style>
+#i
+{
+ margin: 2%;
+ color: blue;
+}
+</style>
+</head>
+    <body>
+        <div id="p1">shvajhvc
+            sabxvxv<i>
+            svhcahvca</i>
+            cadjbcavy
+            sbivsyu
+        </div>
+        <p id="p">SAI GANESH KOLLI
+            23008-CM-029
+            GPT-SKLM</P>
+            <p>vhvvwc</p>
+            <input type="button" id="i"  value="click"></br>    
+                        <img src="C:\SAI GANESH\SAI GANESH KOLLI\SAI GANESH.jpg" width="30%" height="50%" id="me"/></br>
+                        <input type="button" id="i1"  value="download"></br>
+            <img src="C:\SAI GANESH\SAI GANESH KOLLI\IMG-20240928-WA0000.jpg" width="30%" height="50%" id="fnd"/></br>
+            <input type="button" id="i2"  value="download">
+                    <script src="https://code.jquery.com/jquery-3.7.1.js"
+             integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+             crossorigin="anonymous"></script>
+             <script>
+                $(document).ready(function (){ 
+                    $('#i').click(function(){
+                    $('#p').slideToggle();
+                    })
+                    $('#i').dblclick(function(){
+                     $('#p1').hide("slow",function(){slideIn('ganesh')})
+                     })
+                    $('#i1').click(function(){
+                     $('#me').hide("fast",function(){slideIn('Downloaded')})
+                     })
+                     $('#i2').click(function(){
+                     $('#fnd').hide("fast",function(){slideIn('Downloaded')})
+                     })
+                    
+                    }
+                )
+             </script>
+                </body>
+</html>

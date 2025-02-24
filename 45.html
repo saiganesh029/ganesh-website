@@ -1,0 +1,55 @@
+<html>
+    <body>
+      num1:<input id="n1" type="" /> <br/>
+      num2:<input id="n2" type="" /><br/>
+      num3:<input id="n3" type="" /><br/>
+      result:<input id="res" type="" /><br/>
+      <input id="add" type="button" value="add"/>
+      <input id="sub" type="button" value="sub"/>
+      <input id="multi" type="button" value="multi"/>
+      <input id="div" type="button" value="div"/>
+      <input id="cub" type="button" value="cube"/>
+            <script src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"></script>
+      <script>
+        $(document).ready(function(){
+            
+            $('#add').click(function(){
+                var a=($('#n1').val());
+                var b=($('#n2').val());
+                var d=($('#n3').val());
+                c=parseInt(a)+parseInt(b)+parseInt(d);
+                $('#res').val(c);
+            })
+            $('#sub').click(function(){
+                var a=($('#n1').val());
+                var b=($('#n2').val());
+                var d=($('#n3').val());
+                c=parseInt(a)-parseInt(b)-parseInt(d);
+                $('#res').val(c);
+            })
+            $('#multi').click(function(){
+                var a=($('#n1').val());
+                var b=($('#n2').val());
+                var d=($('#n3').val());
+                c=parseInt(a)*parseInt(b)*parseInt(d);
+                $('#res').val(c);
+            })
+            $('#div').click(function(){
+                var a=($('#n1').val());
+                var b=($('#n2').val());
+                var d=($('#n3').val());
+                c=(parseInt(a)+parseInt(b)+parseInt(c))/3;
+                $('#res').val(c);     
+        })
+        $('#cub').click(function(){
+                var a=($('#n1').val());
+                c=(parseInt(a)*parseInt(a)*parseInt(a));
+
+                $('#res').val(c);
+             })
+        })
+      </script>
+    </body>
+</html>

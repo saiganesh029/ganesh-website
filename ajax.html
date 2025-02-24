@@ -1,0 +1,20 @@
+<html>
+<body>
+<h2>The XMLHttpRequest Object</h2>
+<div id="demo" >
+<p>Let AJAX change this text.</p>
+<button type="button" onclick="loadDoc()">submit</button>
+</div>
+<script>
+function loadDoc() {
+const xhttp = new XMLHttpRequest();
+xhttp.onload = function() 
+{
+document.getElementById('demo').innerHTML = this.responseText;
+}
+xhttp.open("get","https://opentdb.com/api.php?amount=7&category=16&difficulty=medium&type=multiple&encode=url3986");
+xhttp.send();
+}
+</script>
+</body>
+</html>
