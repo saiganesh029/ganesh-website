@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sliding Puzzle Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    select, button {
+      margin: 5px;
+      padding: 8px 16px;
+      font-size: 16px;
+    }
+
+    .board {
+      margin-top: 20px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .tile {
+      background-color: #007bff;
+      color: white;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s;
+    }
+
+    .tile.empty {
+      background-color: transparent;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🧩 Sliding Puzzle Game</h2>
+
+  <select id="sizeSelect">
+    <option value="3">3 x 3</option>
+    <option value="4" selected>4 x 4</option>
+    <option value="5">5 x 5</option>
+    <option value="6">6 x 6</option>
+  </select>
+
+  <button onclick="shuffle()">Start Puzzle</button>
+
+  <div class="board" id="board"></div>
+
+  <script>
+    const board = document.getElementById('board');
+    const sizeSelect = document.getElementById('sizeSelect');
+    let size = 4;
+    let tiles = [];
+
+    function createBoard() {
+      board.innerHTML = '';
+      board.style.gridTemplateColumns = `repeat(${size}, 80px)`;
+
+      tiles.forEach((num, i) => {
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        tile.style.width = '80px';
+        tile.style.height = '80px';
+
+        if (num === 0) {
+          tile.classList.add('empty');
+        } else {
+          tile.textContent = num;
+          tile.onclick = () => moveTile(i);
+        }
+
+        board.appendChild(tile);
+      });
+    }
+
+    function moveTile(index) {
+      const emptyIndex = tiles.indexOf(0);
+      const row = Math.floor(index / size);
+      const col = index % size;
+      const emptyRow = Math.floor(emptyIndex / size);
+      const emptyCol = emptyIndex % size;
+
+      const distance = Math.abs(row - emptyRow) + Math.abs(col - emptyCol);
+      if (distance === 1) {
+        [tiles[index], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[index]];
+        createBoard();
+        if (isSolved()) alert('🎉 Puzzle Solved!');
+      }
+    }
+
+    function shuffle() {
+      size = parseInt(sizeSelect.value);
+      const total = size * size;
+      tiles = [...Array(total).keys()];
+
+      do {
+        for (let i = total - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+        }
+      } while (!isSolvable(tiles, size) || isSolved());
+
+      createBoard();
+    }
+
+    function isSolvable(arr, size) {
+      let inv = 0;
+      const len = arr.length;
+      for (let i = 0; i < len - 1; i++) {
+        for (let j = i + 1; j < len; j++) {
+          if (arr[i] && arr[j] && arr[i] > arr[j]) inv++;
+        }
+      }
+      if (size % 2 === 1) {
+        return inv % 2 === 0;
+      } else {
+        const rowFromBottom = size - Math.floor(arr.indexOf(0) / size);
+        return (inv + rowFromBottom) % 2 === 0;
+      }
+    }
+
+    function isSolved() {
+      const goal = [...Array(size * size).keys()].slice(1).concat(0);
+      return tiles.join(',') === goal.join(',');
+    }
+
+    shuffle(); // initialize
+  </script>
+
+</body>
+</html>
